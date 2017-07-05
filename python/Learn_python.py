@@ -232,3 +232,171 @@ def set_globalx(num):
     print(x)
 
 set_globalx(6)
+
+# 函数为一等公民
+def create_adder(x):
+    def adder(y):
+        return x+y
+    return adder
+
+adder_10 = create_adder(10)
+print(adder_10(3))
+
+# 匿名函数使用
+print((lambda x, y: x**2 + y**2)(2,1))
+
+# List/ set/ dict comprehensions
+print([adder_10(i) for i in [1, 2, 3]])
+print(*(x for x in [3, 4, 5, 6, 7] if x > 5))
+
+print({x for x in 'abcdef' if x not in 'abc'})
+print({x: x**2 for x in range(5)})
+
+# ========== 5. modules ===========
+# 导入模块
+import math
+print(math.ceil(3.7))
+# 导入模块并起别名
+import math as m
+print(m.ceil(3.7))
+# 打印模块中定义的属性和方法
+print(dir(m))
+print(m.__doc__)
+# 导入模块中的特定函数
+from math import ceil
+# from math import * 不推荐
+print(ceil(3.7))
+
+# Python的模块只是普通的Python文件。我们可以导入我们自己的文件，模块名称也就是文件名称。如果在当前目录下有同样命名为math.py的文件，那么它会被导入而不是build-in Python module.当前目录有更高的优先级
+
+# ========== 6. Classes ===========
+class Human:
+    # 类属性
+    species = "H. sapiens"
+
+    # 形如__method__的方法（对象或属性）被称作特殊方法（对象或属性）
+    # 由Python定义及使用，我们不应该创建这种名字的方法（对象或属性）
+    # 初始化方法
+    def __init__(self, name):
+        self.name = name
+        self._age = 0
+
+    # 实例方法，self都会作为第一个参数
+    # one instance, one method
+    def say(self, msg):
+        print("{0}: {1}".format(self.name, msg))
+
+    # class method: all instances, one class, one method
+    # calling class as the first argument
+    @classmethod
+    def get_species(cls):
+        return cls.species
+
+    #static method: without a class or instance reference
+    # no instances, no class , one method
+    @staticmethod
+    def grunt():
+        return "*grunt*"
+
+    # make property read-only; implicit getter
+    @property
+    def age(self):
+        return self._age
+
+    # allow the property to be set
+    # 如果将下列代码段进行注释，那么'can't set attribute'
+    @age.setter
+    def age(self, age):
+        self._age = age
+
+    @age.deleter
+    def age(self):
+        del self._age
+
+# 当python读代码文件时它会执行所有代码，
+# 而对__name__的检查能够确保只有当该module为主程序时才会执行以下的代码段
+if __name__ == '__main__':
+    i = Human("Johnny")
+    j = Human("Joe")
+    print(i.get_species)
+    print(j.get_species)
+
+    print(Human.grunt())
+    # print(i.grunt()) cause error
+
+    i.age = 40
+    i.say(i.age)
+    del i.age
+
+# ========== 6.1 Multiple Inheritance ===========
+class Bat:
+    species = 'Baty'
+
+    def __init__(self, can_fly=True):
+        self.fly = can_fly
+
+# 多重继承(父类的顺序会影响方法解析的搜索顺序)
+class Batman(Human, Bat):
+    species = 'Superhero'
+
+    def __init__(self, *args, **kwargs):
+        # 显式调用父类初始化方法
+        Human.__init__(self, 'anonoymous', *args, **kwargs)
+        Bat.__init__(self, can_fly=True, *args, **kwargs)
+
+if __name__ == '__main__':
+    sup = Batman()
+
+    if isinstance(sup, Human):
+        print("I am human")
+    if isinstance(sup, Bat):
+        print("I am bat")
+    if type(sup) is Batman:
+        print('I am Batman')
+
+    # (<class '__main__.Batman'>, <class '__main__.Bat'>, <class '__main__.Human'>, <class 'object'>)
+    print(Batman.__mro__)
+
+# ========== 7. Advanced ===========
+# Iterable将所有值存储在内存中，当有大量数值的时候它并不总是我们想要的
+# Generator只能使用一次，它不将所有值存储在内存中，它生成值on the fly
+# yield类似return，但它返回一个Generator
+
+# 将Iterable转换为Generator
+# Notice: when you call the function ,the code you have written in the function body does not run, it only returns the generator object.see https://stackoverflow.com/questions/231767/what-does-the-yield-keyword-do-in-python
+def double_numbers(iterable):
+    for i in iterable:
+        yield i+i
+
+for i in double_numbers(range(1, 900000000)):
+    print(i)
+    if i>= 30:
+        break
+
+# generator comprehensions
+values = (-x for x in [1, 2, 3, 4, 5])
+# 可以将Generator转换为list
+values2list = list(values)
+print(values2list)
+
+# python装饰器（包装函数的函数，返回修改后的函数对象）使用场景：
+# 面向切面编程，可用于插入日志、性能测试等，
+# 重用装饰器代码，抽离与函数功能本身无关的代码从而形成
+from functools import wraps
+
+def beg(target_function):
+    @wraps(target_function)
+    def wrapper(*args, **kwargs):
+        msg, say_please = target_function(*args, **kwargs)
+        if say_please:
+            return "{} trace for performance".format(msg)
+        return msg
+
+    return wrapper
+
+@beg
+def say(say_please=False):
+    msg = "start do somthing"
+    return msg, say_please
+
+print(say(say_please=True))
