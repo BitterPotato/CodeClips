@@ -1,0 +1,4 @@
+TutorialComp25 1 0.0156212
+TutorialComp-25 1 0.0155964
+TutorialComp0.0001 1 0
+---

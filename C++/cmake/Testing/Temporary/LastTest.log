@@ -1,0 +1,77 @@
+Start testing: Jul 14 20:22 ?D1迆㊣那℅?那㊣??
+----------------------------------------------------------
+1/3 Testing: TutorialComp25
+1/3 Test: TutorialComp25
+Command: "E:/My Workspace/CodeClips/C++/cmake/Tutorial.exe" "25"
+Directory: E:/My Workspace/CodeClips/C++/cmake
+"TutorialComp25" start time: Jul 14 20:22 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+Computing sqrt of 25 to be 13
+Computing sqrt of 25 to be 7.46154
+Computing sqrt of 25 to be 5.40603
+Computing sqrt of 25 to be 5.01525
+Computing sqrt of 25 to be 5.00002
+Computing sqrt of 25 to be 5
+Computing sqrt of 25 to be 5
+Computing sqrt of 25 to be 5
+Computing sqrt of 25 to be 5
+Computing sqrt of 25 to be 5
+25 is 5
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Pass Reason:
+Required regular expression found.Regex=[25 is 5
+]
+"TutorialComp25" end time: Jul 14 20:22 ?D1迆㊣那℅?那㊣??
+"TutorialComp25" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/3 Testing: TutorialComp-25
+2/3 Test: TutorialComp-25
+Command: "E:/My Workspace/CodeClips/C++/cmake/Tutorial.exe" "-25"
+Directory: E:/My Workspace/CodeClips/C++/cmake
+"TutorialComp-25" start time: Jul 14 20:22 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+-25 is 0
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Pass Reason:
+Required regular expression found.Regex=[-25 is 0
+]
+"TutorialComp-25" end time: Jul 14 20:22 ?D1迆㊣那℅?那㊣??
+"TutorialComp-25" time elapsed: 00:00:00
+----------------------------------------------------------
+
+3/3 Testing: TutorialComp0.0001
+3/3 Test: TutorialComp0.0001
+Command: "E:/My Workspace/CodeClips/C++/cmake/Tutorial.exe" "0.0001"
+Directory: E:/My Workspace/CodeClips/C++/cmake
+"TutorialComp0.0001" start time: Jul 14 20:22 ?D1迆㊣那℅?那㊣??
+Output:
+----------------------------------------------------------
+Computing sqrt of 0.0001 to be 0.50005
+Computing sqrt of 0.0001 to be 0.250125
+Computing sqrt of 0.0001 to be 0.125262
+Computing sqrt of 0.0001 to be 0.0630304
+Computing sqrt of 0.0001 to be 0.0323084
+Computing sqrt of 0.0001 to be 0.0177018
+Computing sqrt of 0.0001 to be 0.0116755
+Computing sqrt of 0.0001 to be 0.0101202
+Computing sqrt of 0.0001 to be 0.0100007
+Computing sqrt of 0.0001 to be 0.01
+0.0001 is 0.01
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Pass Reason:
+Required regular expression found.Regex=[0.0001 is 0.01
+]
+"TutorialComp0.0001" end time: Jul 14 20:22 ?D1迆㊣那℅?那㊣??
+"TutorialComp0.0001" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Jul 14 20:22 ?D1迆㊣那℅?那㊣??
